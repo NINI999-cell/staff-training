@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JLPT N5 真題題庫 — 2010-2013完整版</title>
+<title>JLPT N5 真題題庫</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -145,12 +145,13 @@ function renderCats() {
     const done = dotState[k].filter(x=>x!==null).length;
     const cor = dotState[k].filter(x=>x===true).length;
     const pctText = done>0 ? ` ${cor}/${done}` : '';
-    return `<button class="cat-btn ${k===currentCat?'active':''}" onclick="selectCat(${JSON.stringify(k)})">
+    return `<button class="cat-btn ${k===currentCat?'active':''}" onclick="selectCatByIndex(${catNames.indexOf(k)})">
       <span>${k}</span><span class="cat-count">${Q[k].length}題${pctText}</span>
     </button>`;
   }).join('');
 }
 
+function selectCatByIndex(i) { selectCat(catNames[i]); }
 function selectCat(cat) {
   currentCat = cat; currentIdx = 0; answered = false;
   renderCats(); renderQ();
